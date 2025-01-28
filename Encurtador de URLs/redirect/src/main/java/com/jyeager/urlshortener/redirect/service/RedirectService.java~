@@ -1,0 +1,39 @@
+package com.jyeager.urlshortener.redirect.service;
+
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+/**
+ * Serviço responsável por buscar a URL original associada a um código curto.
+ * Utiliza o RestTemplate para se comunicar com o serviço de encurtamento (Shortener Service).
+ */
+@Service
+public class RedirectService {
+
+    // Injeção de dependência do RestTemplate via construtor.
+    public RedirectService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    private final RestTemplate restTemplate;
+
+    /**
+     * Metdo para buscar a URL original no Shortener Service, com base no código curto fornecido.
+     *
+     * @param shortCode Código curto associado à URL original.
+     * @return A URL original se encontrada, ou null caso contrário.
+     */
+    public String getOriginalUrl(String shortCode) {
+        // Define a URL do endpoint do Shortener Service para recuperar a URL original.
+        String shortenerServiceUrl = "http://localhost:8080/shortener/" + shortCode;
+
+        // Log da URL do serviço sendo chamada.
+        System.out.println("URL do Shortener Service: " + shortenerServiceUrl);
+
+        // Faz uma requisição GET ao Shortener Service e retorna a URL original como String.
+        return restTemplate.getForObject(shortenerServiceUrl, String.class);
+    }
+
+    
+}

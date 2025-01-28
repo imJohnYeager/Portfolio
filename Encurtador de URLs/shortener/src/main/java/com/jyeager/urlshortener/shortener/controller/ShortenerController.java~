@@ -1,0 +1,61 @@
+package com.jyeager.urlshortener.shortener.controller;
+
+import com.jyeager.urlshortener.shortener.entity.ShortenerEntity;
+import com.jyeager.urlshortener.shortener.service.ShortenerService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+/**
+ * Controlador responsável por gerenciar os endpoints relacionados ao encurtamento de URLs.
+ */
+@RestController // Indica que esta classe é um controlador REST, ou seja, retornará respostas JSON.
+@RequestMapping("/shortener") // Define a URL base para todos os endpoints desta classe.
+public class ShortenerController {
+
+    private final ShortenerService service;
+
+    /**
+     * Construtor que injeta o serviço de encurtamento de URLs.
+     *
+     * @param service Serviço responsável pelas operações de encurtamento e recuperação de URLs.
+     */
+    public ShortenerController(ShortenerService service) {
+        this.service = service;
+    }
+
+    /**
+     * Endpoint para recuperar a URL original a partir de um código encurtado.
+     *
+     * @param shortCode Código encurtado da URL.
+     * @return A URL original correspondente ao código fornecido.
+     */
+    @GetMapping("/{shortCode}") // Mapeia requisições GET para "/shortener/{shortCode}"
+    public String getOriginalUrl(@PathVariable String shortCode) { // @PathVariable indica que o valor virá da URL
+        Optional<ShortenerEntity> shortenerEntity = service.findByShortCode(shortCode); // Busca a entidade pelo código encurtado
+
+        // Mapeia o valor encontrado para a URL original, se existir
+        Optional<String> originalUrl = shortenerEntity.map(ShortenerEntity::getOriginalUrl);
+
+        // Exibe a URL encontrada no console
+        System.out.println("Valor do return: " + originalUrl);
+
+        // Retorna a URL original ou lança uma exceção caso não seja encontrada
+        return originalUrl.orElseThrow(() -> new RuntimeException("URL não encontrada, valor: " + originalUrl));
+    }
+
+    /**
+     * Endpoint para encurtar uma URL fornecida.
+     *
+     * @param url A URL original a ser encurtada.
+     * @return O código encurtado gerado para a URL.
+     */
+    @PostMapping // Mapeia requisições POST para "/shortener"
+    public String shortenUrl(@RequestParam String url) { // @RequestParam indica que a URL será passada como parâmetro na requisição
+        return service.shortenUrl(url); // Chama o serviço para encurtar a URL e retorna o código gerado
+    }
+
+    /**
+     * 
+     */
+}
