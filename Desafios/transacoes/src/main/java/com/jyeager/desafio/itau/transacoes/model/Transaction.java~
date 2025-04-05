@@ -1,0 +1,11 @@
+package com.jyeager.desafio.itau.transacoes.model;
+
+import java.time.OffsetDateTime;
+
+@Constru
+public class Transaction {
+    private double valor;
+    private OffsetDateTime dataHora;
+
+
+}
