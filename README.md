@@ -14,29 +14,9 @@ Monitor de anúncios do site Rolimons integrado ao Discord.
   - Captura anúncios automaticamente
   - Filtros de tags e valores
   - Notificação via webhook no Discord
-
----
-
-### 🔹 [Gerenciador de Despesas Pessoais](https://github.com/imJohnYeager/gerenciador-despesas)
-Sistema em microservices para controle de despesas.
-- **Stack**: Java, Spring Boot, Microservices, REST API
-- **Funcionalidades**:
-  - Cadastro de receitas e despesas
-  - Relatórios por categoria
-  - API para integração futura com apps mobile
-
----
-
-## 🧪 Mini Projetos
-Projetos pequenos e experimentos estão na pasta [`/mini-projects`](./mini-projects).  
-
-Exemplos:
-- Scripts em **Python** para automação
-- Testes em **Java** para APIs
-- Protótipos de **front-end**
-
 ---
 
 ## 📬 Contato
 - **E-mail**: contatojhonatasc@gmail.com  
 - **GitHub**: [imJohnYeager](https://github.com/imJohnYeager)
+- **LinkedIn**: [eujohnyeager]([https://github.com/imJohnYeager](https://www.linkedin.com/in/eujohnyeager/))
